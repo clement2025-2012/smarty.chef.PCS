@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍳 Smarty-Chef.PCS - AI Recipe Generator</title>
+    <meta name="description" content="AI-powered smart recipe generator with 500+ ingredients. Create delicious recipes based on your available ingredients.">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.jpg">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.jpg">
+    <meta name="theme-color" content="#ff6b35">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🍳 Smarty-Chef.PCS</h1>
+            </div>
+            <div class="nav-menu">
+                <button id="homeBtn" class="nav-btn active">🏠 Home</button>
+                <button id="ingredientsBtn" class="nav-btn">🥬 Ingredients</button>
+                <button id="recipesBtn" class="nav-btn">📋 Recipes</button>
+                <button id="aboutBtn" class="nav-btn">ℹ️ About</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home View -->
+    <div id="homeView" class="view">
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>🍳 Welcome to Smarty-Chef.PCS</h2>
+                <p>Transform your available ingredients into delicious recipes with the power of AI and 500+ global ingredients!</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Global Ingredients</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">365K+</span>
+                        <span class="stat-label">Real Recipes</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">11</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                </div>
+                <button onclick="showView('ingredients')" class="cta-button">Start Cooking 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingredients View -->
+    <div id="ingredientsView" class="view" style="display: none;">
+        <div class="ingredients-section">
+            <div class="section-header">
+                <h2>🥬 Select Your Ingredients</h2>
+                <p>Choose from over 500 global ingredients organized by category</p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="controls-panel">
+                <div class="search-container">
+                    <input type="search" id="ingredientSearch" placeholder="🔍 Search ingredients..." class="search-input">
+                </div>
+
+                <div class="filters-container">
+                    <select id="dietaryPreference" class="filter-select">
+                        <option value="">Any Diet</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="gluten-free">Gluten-Free</option>
+                        <option value="dairy-free">Dairy-Free</option>
+                        <option value="indian">Indian Cuisine</option>
+                    </select>
+
+                    <input type="text" id="allergies" placeholder="Allergies (comma-separated)" class="filter-input">
+                </div>
+            </div>
+
+            <!-- Selected Ingredients -->
+            <div class="selected-section">
+                <h3>Selected Ingredients (<span id="selectedCount">0</span>)</h3>
+                <div id="selectedIngredients" class="selected-ingredients">
+                    <p class="empty-state">No ingredients selected</p>
+                </div>
+                <div class="selected-actions">
+                    <button id="clearIngredients" class="btn-secondary">Clear All</button>
+                    <button id="generateRecipes" class="btn-primary">Generate Recipes 🍳</button>
+                </div>
+            </div>
+
+            <!-- Ingredients Container -->
+            <div id="ingredientContainer" class="ingredients-container">
+                <!-- Ingredients will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipes View -->
+    <div id="recipesView" class="view" style="display: none;">
+        <div class="recipes-section">
+            <div class="section-header">
+                <h2>📋 Your Generated Recipes</h2>
+                <p>Delicious recipes crafted from your selected ingredients</p>
+            </div>
+
+            <div id="recipesContainer" class="recipes-container">
+                <div class="empty-state">
+                    <h3>No recipes generated yet</h3>
+                    <p>Select some ingredients first to generate amazing recipes!</p>
+                    <button onclick="showView('ingredients')" class="btn-primary">Select Ingredients</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About View -->
+    <div id="aboutView" class="view" style="display: none;">
+        <div class="about-section">
+            <div class="section-header">
+                <h2>ℹ️ About Smarty-Chef.PCS</h2>
+                <p>Your AI-powered cooking companion</p>
+            </div>
+
+            <div class="about-content">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🌍 Global Ingredients</h3>
+                        <p>Choose from 500+ ingredients spanning vegetables, fruits, grains, spices, and more from around the world.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤖 AI-Powered</h3>
+                        <p>Advanced AI technology combined with Spoonacular API to generate personalized recipes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🇮🇳 Indian Cuisine Focus</h3>
+                        <p>Specialized collection of Indian ingredients, spices, and traditional cooking methods.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔍 Smart Search</h3>
+                        <p>Intelligent ingredient search and filtering to find exactly what you're looking for.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📱 Mobile Ready</h3>
+                        <p>Responsive design that works perfectly on mobile devices and can be installed as a PWA.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🍽️ Dietary Support</h3>
+                        <p>Support for vegetarian, vegan, gluten-free and other dietary preferences and allergies.</p>
+                    </div>
+                </div>
+
+                <div class="creator-section">
+                    <h3>👨‍💻 Made with ❤️ by Clement</h3>
+                    <p>Smarty-Chef.PCS combines beautiful design with powerful functionality to make cooking accessible and fun for everyone.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
